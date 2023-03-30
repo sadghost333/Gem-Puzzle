@@ -1,17 +1,6 @@
-@mixin  flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@mixin  flex-around {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
 body {
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(210,108,22,1) 0%, rgba(0,212,255,1) 100%);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(210, 108, 22) 0%, rgb(0, 212, 255) 100%);
 }
 
 * {
@@ -19,21 +8,25 @@ body {
   padding: 0;
 }
 
-.container{
+.container {
   margin: 0 auto;
   width: 1000px;
 }
 
-.header{
+.header {
   height: 100px;
-  @include flex-center();
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu {
   height: 65px;
-  @include flex-center();
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 100px;
-  background-color: rgba($color: #287f74, $alpha: 0)
+  background-color: rgba(40, 127, 116, 0);
 }
 
 .menu-item {
@@ -47,30 +40,32 @@ body {
   text-shadow: 1px 1px 1px #000;
 }
 
-.menu-item:hover{
+.menu-item:hover {
   background-color: #b4af1b;
   transition: 0.1s;
 }
 
-.menu-item:active{
+.menu-item:active {
   border: 2px solid #000000;
   transition: 0s;
 }
 
 .score-wrapper {
-  @include flex-center();
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 80px;
   margin: 15px;
 }
 
 .moves, .moves-num, .time, .time-num {
-  font-size: 30px; 
+  font-size: 30px;
 }
 
-.game-wrapper{
+.game-wrapper {
   margin: 0 auto;
-  width: 700px ;
-  height: 700px ;
+  width: 700px;
+  height: 700px;
   border: 3px solid #f65ca1;
   display: flex;
   justify-content: space-around;
@@ -88,7 +83,7 @@ body {
   animation: showBlock 0.5s linear forwards;
 }
 
-.game-item-empty{
+.game-item-empty {
   background-color: #bd4500;
   border: 1px solid #000000;
   animation: showBlock 0.5s linear forwards;
@@ -102,7 +97,6 @@ body {
     opacity: 1;
   }
 }
-
 .footer-wrapper {
   width: 900px;
   height: 75px;
@@ -112,10 +106,12 @@ body {
   justify-content: space-between;
 }
 
-.frame-size-wrapper{
+.frame-size-wrapper {
   width: 900px;
   height: 50px;
-  @include flex-center();
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .frame-size-num {
@@ -127,24 +123,27 @@ body {
 .other-sizes-wrapper {
   width: 900px;
   height: 50px;
-  @include flex-center();
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
 }
 
 .size-item {
- width: 50px;
- height: 30px;
- font-size: 25px;
- border: 1px solid #f65ca1;
- border-radius: 5px;
+  width: 50px;
+  height: 30px;
+  font-size: 25px;
+  border: 1px solid #f65ca1;
+  border-radius: 5px;
+  background-color: #ffffff;
 }
 
-.three {
+.size-item.selected {
   background-color: green;
 }
 
-.frame-size-text, .other-sizes-text{
+.frame-size-text, .other-sizes-text {
   width: 125px;
   height: 32px;
   font-size: 25px;
-}
+}/*# sourceMappingURL=style.css.map */
