@@ -47,6 +47,17 @@ body {
   text-shadow: 1px 1px 1px #000;
 }
 
+.menu-item-disabled{
+  width: 100px;
+  height: 50px;
+  border-radius: 3px;
+  border: 1px solid #000000;
+  background-color: #898687;
+  color: oldlace;
+  font-size: 20px;
+  text-shadow: 1px 1px 1px #000;
+}
+
 .menu-item:hover{
   background-color: #b4af1b;
   transition: 0.1s;
@@ -139,7 +150,7 @@ body {
  border-radius: 5px;
 }
 
-.three {
+.green-active {
   background-color: green;
 }
 
@@ -147,4 +158,77 @@ body {
   width: 125px;
   height: 32px;
   font-size: 25px;
+}
+
+.results-wrapper{
+  position: absolute; 
+  right: 37vw;
+  top: 25vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 500px;
+  height: 500px;
+  background-color: orange;
+  border: #ffffff 2px solid;
+  border-radius: 20px;
+}
+
+.results-header{
+  margin-top: 10px;
+  font-size: 45px;
+}
+
+.results-list{
+  overflow-y: scroll;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+  width: 300px;
+  height: 350px;
+}
+
+.results-item{
+  list-style: none;
+  width: 290px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: green;
+  border: #000000 2px solid;
+  border-radius: 10px;
+}
+
+.moves-result{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.time-result{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.results-close-btn{
+  width: 70px;
+  height: 30px;
+  border-radius: 3px;
+  border: #000000 1px solid;
+  font-size: 20px;
+  background: #fbd9d9;
+}
+
+.results-close-btn:hover{
+  background-color: #b4af1b;
+  transition: 0.1s;
+}
+
+.results-close-btn:active{
+  border: 2px solid #000000;
+  transition: 0s;
 }

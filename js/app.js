@@ -8,6 +8,8 @@ const time = document.querySelector('.time-num');
 const movesNum = document.querySelector('.moves-num');
 const sizeBtns = document.querySelectorAll('.size-item');
 const gameBox = document.querySelector('.game-wrapper');
+const resultsWindow = document.querySelector('.results-wrapper')
+const closeResults = document.querySelector('.results-close-btn')
 
 let isGameRun = false;
 let seconds = 0;
@@ -17,7 +19,6 @@ let isShuffle = false;
 let isWin = false;
 time.textContent = `${seconds} seconds`;
 movesNum.textContent = moves;
-
 
 window.addEventListener('load', () => {
   handleEventListeners();
@@ -29,7 +30,9 @@ function handleEventListeners() {
   sizeBtns.forEach(e => e.addEventListener('click', function({ target }) {
     const prevSelected = document.querySelector('.size-item.selected');
     prevSelected.classList.remove('selected');
+    prevSelected.classList.remove('green-active');
     target.classList.add('selected');
+    target.classList.add('green-active');
 
     frameSizeNum.textContent = target.textContent;
     frameSize = +(target.textContent[0]);
@@ -41,6 +44,12 @@ function handleEventListeners() {
 
   startBtn.addEventListener('click', startAndStop);
   shuffleBtn.addEventListener('click', getShuffle);
+  resultsBtn.addEventListener('click', function(){
+    resultsWindow.style.display = 'flex'
+  })
+  closeResults.addEventListener('click', function(){
+    resultsWindow.style.display = 'none'
+  })
 }
 
 function secondsUp() {
@@ -52,22 +61,28 @@ function secondsUp() {
 }
 
 function startAndStop() {
-  if(!isGameRun){
-    isGameRun = true;
-    secondsUp();
-    startBtn.textContent = 'Stop';
-    gameBox.childNodes.forEach(e => {
-      e.draggable = 'true';
-    })
-    return;
-  }
+  if(isShuffle){
+    if(!isGameRun){
+      isGameRun = true;
+      secondsUp();
+      startBtn.textContent = 'Stop';
+      gameBox.childNodes.forEach(e => {
+        e.draggable = 'true';
+      })
+      return;
+    }
 
-  isGameRun = false;
-  startBtn.textContent = 'Start';
+    isGameRun = false;
+    startBtn.textContent = 'Start';
+    gameBox.childNodes.forEach(e => {
+      e.draggable = '';
+    })
+  }
 }
 
 function getShuffle() {
   if(isShuffle){
+    startBtn.classList.add('menu-item');
     seconds = 0;
     moves = 0;
     time.textContent = `${seconds} seconds`;
@@ -77,8 +92,9 @@ function getShuffle() {
     generateItems();
     return;
   }
-
   isShuffle = true;
+  startBtn.classList.remove('menu-item-disabled');
+  startBtn.classList.add('menu-item');
   generateItems();
 }
 
@@ -152,30 +168,33 @@ function moveEventListeners() {
     }
     
     checkItemsOrder()
-    if(isWin){
-      alert('Win!');
-    }
   }));
 }
 
 function checkItemsOrder() {
-  let items = document.querySelectorAll('.game-items');
-
-  for(let i = 0; i < items.length; i++){
-    let currentItem = items[i + 1];
-
-    if(currentItem.style.order === i){
-      isWin = true;
+  let items = gameBox.childNodes;
+  let count = 0;
+  
+  for(let i = 0; i < items.length - 1; i++){
+    let currentItem = items[i];
+    if(+(currentItem.style.order) === i){
+      count = count + 1;
+      console.log(count);
     }
-    if(currentItem.style.order !== i){
-      isWin = false;
+    if(count === (items.length - 1)){
+      isWin= true;
     }
-  }
+  } 
+
   if(isWin){
-    isShuffle = false;
-    items.forEach(e => {
-      e.draggable = '';
-    })
-  }
-
-} 
+      startAndStop();
+      items.forEach(e => {
+        e.draggable = '';
+      })
+      alert('Win!')
+      saveBtn.classList.add('menu-item');
+      saveBtn.classList.remove('menu-item-disabled')
+      startBtn.classList.add('menu-item-disabled');
+      startBtn.classList.remove('menu-item');
+    }
+}
