@@ -83,6 +83,7 @@ function startAndStop() {
 function getShuffle() {
   if(isShuffle){
     startBtn.classList.add('menu-item');
+    startBtn.classList.remove('menu-item-disabled');
     seconds = 0;
     moves = 0;
     time.textContent = `${seconds} seconds`;
