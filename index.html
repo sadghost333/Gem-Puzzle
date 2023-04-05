@@ -12,8 +12,8 @@
     <div class="container">
       <div class="menu">
         <button class="menu-item shuffle-btn">Shuffle and Start</button>
-        <button class="menu-item start-btn">Start</button>
-        <button class="menu-item save-btn">Save</button>
+        <button class="menu-item-disabled start-btn">Start</button>
+        <button class="menu-item-disabled save-btn">Save</button>
         <button class="menu-item results-btn">Results</button>
       </div>
     </div>
@@ -40,7 +40,7 @@
         </div>
         <div class="other-sizes-wrapper">
           <div class="other-sizes-text">Other sizes:</div>
-          <button class="size-item selected">3x3</button>
+          <button class="size-item selected green-active">3x3</button>
           <button class="size-item">4x4</button>
           <button class="size-item">5x5</button>
           <button class="size-item">6x6</button>
@@ -50,6 +50,16 @@
       </div>
     </div>
   </footer>
+  <div class="results-wrapper">
+    <h2 class="results-header">Results</h2>
+    <ul class="results-list">
+<!--       <li class="results-item">
+        <p class="moves-result">22</p>
+        <p class="time-result">132</p>
+      </li> -->
+    </ul>
+    <button class="results-close-btn">Close</button>
+  </div>
   <script src="./js/app.js" type='module'></script>
 </body>
 </html>
