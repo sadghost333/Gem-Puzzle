@@ -10,6 +10,7 @@ const sizeBtns = document.querySelectorAll('.size-item');
 const gameBox = document.querySelector('.game-wrapper');
 const resultsWindow = document.querySelector('.results-wrapper')
 const closeResults = document.querySelector('.results-close-btn')
+const resultsList = document.querySelector('.results-list');
 
 let isGameRun = false;
 let seconds = 0;
@@ -44,12 +45,42 @@ function handleEventListeners() {
 
   startBtn.addEventListener('click', startAndStop);
   shuffleBtn.addEventListener('click', getShuffle);
-  resultsBtn.addEventListener('click', function(){
-    resultsWindow.style.display = 'flex'
-  })
+  resultsBtn.addEventListener('click', generateResults)
   closeResults.addEventListener('click', function(){
-    resultsWindow.style.display = 'none'
+    resultsWindow.style.display = 'none';
   })
+
+  saveBtn.addEventListener('click', saveResults)
+}
+function saveResults() {
+  if(isWin){
+    const finalMoves = moves;
+    const finalTime = seconds;
+    const resultsObj = {
+      moves: finalMoves,
+      time: finalTime
+    };
+    localStorage.setItem(`game${localStorage.length}`, JSON.stringify(resultsObj));
+  }
+}
+
+function generateResults(){
+  for(let i = 0; i < localStorage.length; i++){
+    let currentResult = JSON.parse(localStorage.getItem(`game${i}`));
+    console.log(currentResult);
+    let li = document.createElement('li');
+    let p = document.createElement('p');
+    let div = document.createElement('div');
+    resultsList.append(li);
+    li.classList.add('results-item');
+    li.append(div);
+    div.classList.add('moves-result');
+    div.textContent = `${currentResult.moves} moves`;
+    li.append(p);
+    p.classList.add('time-result');
+    p.textContent = `${currentResult.time} seconds`;
+  }
+  resultsWindow.style.display = 'flex';
 }
 
 function secondsUp() {
@@ -92,6 +123,16 @@ function getShuffle() {
     startBtn.textContent = 'Start';
     generateItems();
     return;
+  }
+  if(!isShuffle && isWin){
+    isWin = false;
+    isShuffle = true;
+    startBtn.classList.remove('menu-item-disabled');
+    startBtn.classList.add('menu-item');seconds = 0;
+    moves = 0;
+    time.textContent = `${seconds} seconds`;
+    movesNum.textContent = moves;
+    generateItems();
   }
   isShuffle = true;
   startBtn.classList.remove('menu-item-disabled');
@@ -180,7 +221,6 @@ function checkItemsOrder() {
     let currentItem = items[i];
     if(+(currentItem.style.order) === i){
       count = count + 1;
-      console.log(count);
     }
     if(count === (items.length - 1)){
       isWin= true;
@@ -192,6 +232,7 @@ function checkItemsOrder() {
       items.forEach(e => {
         e.draggable = '';
       })
+      isShuffle = false;
       alert('Win!')
       saveBtn.classList.add('menu-item');
       saveBtn.classList.remove('menu-item-disabled')
@@ -199,3 +240,4 @@ function checkItemsOrder() {
       startBtn.classList.remove('menu-item');
     }
 }
+
