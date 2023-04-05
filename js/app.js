@@ -48,6 +48,9 @@ function handleEventListeners() {
   resultsBtn.addEventListener('click', generateResults)
   closeResults.addEventListener('click', function(){
     resultsWindow.style.display = 'none';
+    while(resultsList.firstChild){
+      resultsList.removeChild(resultsList.firstChild);
+    }
   })
 
   saveBtn.addEventListener('click', saveResults)
